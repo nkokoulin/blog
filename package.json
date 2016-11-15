@@ -11,5 +11,8 @@
     "javascript"
   ],
   "author": "Nikolay Kokoulin",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
 }
