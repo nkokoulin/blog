@@ -1,5 +1,5 @@
 #dbconfig
-dbconfig.js
+database/dbconfig.js
 
 # Logs
 logs
