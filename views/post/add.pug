@@ -1,0 +1,10 @@
+doctype html
+html
+	head
+	body
+		form(action='/admin/add', method='post')
+			textarea(name='content', placeholder='Содержание поста', required)
+			select(name='publishStatus', required)
+				each status in statuses
+					option(value=status.id)= status.label
+			input(type='submit', value='Добавить запись')
