@@ -1,0 +1,10 @@
+doctype html
+html
+	head
+	body
+		form(action='/admin/change/'+post.id, method='post')
+			textarea(name='content', placeholder='Содержание поста', required)= post.content
+			select(name='publishStatus', required)
+				each status in statuses
+					option(value=status.id)= status.label
+			input(type='submit', value='Изменить запись')
