@@ -3,6 +3,7 @@ html
 	head
 	body
 		form(action='/admin/add', method='post')
+			input(type = 'text', name='title' placeholder='Заголовок', required)
 			textarea(name='content', placeholder='Содержание поста', required)
 			select(name='publishStatus', required)
 				each status in statuses

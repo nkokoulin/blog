@@ -15,6 +15,9 @@ app.use(require('./router'));
 app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'pug');
 
+//public folder
+app.use(express.static('public'));
+
 app.listen(3001, function() {
 	console.log('server listening on post 3001')
 });

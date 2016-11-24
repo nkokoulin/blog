@@ -1,0 +1,9 @@
+extends ../layouts/public.pug
+
+block content
+	h1 Блог разработчика SkillBook
+	p
+		a(href='/') Вернуться на главную
+	div
+		h3= post.title
+		p= post.content

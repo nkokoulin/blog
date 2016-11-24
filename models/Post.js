@@ -26,19 +26,10 @@ Post.findById = function(id, callback) {
 	});
 }
 
-//Найти все возможные статусы из таблицы PostStatus
-Post.findAllStatuses = function() {
-	pool.query('SELECT * from postStatus', function(err, rows, fields) {
-		rows.forEach(function(row, i) {
-			console.log(row.label);
-		});
-	});
-}
-
 //Создать пост из req (данные реквеста)
 Post.createFromReq = function(req) {
 	var post = new Post();
-	console.log(req.body.content)
+	post.title = req.body.title;
 	post.content = req.body.content;
 	post.publishDate = new Date();
 	post.postStatusId = req.body.publishStatus;
@@ -48,14 +39,24 @@ Post.createFromReq = function(req) {
 	return post;
 }
 
+Post.delete = function(id, callback) {
+	pool.query('DELETE FROM post WHERE id = ?', id, function(err, res) {
+		if (err) throw err;
+
+		if(typeof callback === 'function') {
+			callback();
+		}
+	});
+}
+
 /*
  * Методы
  */
 
 // Изменение
 Post.prototype.update = function(callback) {
-	if (this.content !== undefined && this.publishDate !== undefined && this.postStatusId !== undefined && this.id !== undefined) {
-		var post = {content: this.content, publishDate: this.publishDate, postStatusId: this.postStatusId};
+	if (this.title !== undefined && this.content !== undefined && this.publishDate !== undefined && this.postStatusId !== undefined && this.id !== undefined) {
+		var post = {title: this.title, content: this.content, publishDate: this.publishDate, postStatusId: this.postStatusId};
 		pool.query('UPDATE post SET ? WHERE id = ?', [post, this.id], function(err, result) {
 			if (err) throw err;
 			if (typeof callback === 'function') {
@@ -70,8 +71,8 @@ Post.prototype.update = function(callback) {
 
 // Добавление (return indertId to callback if success)
 Post.prototype.save = function(callback) {
-	if (this.content !== undefined && this.publishDate !== undefined && this.postStatusId !== undefined) {
-		var post = {content: this.content, publishDate: this.publishDate, postStatusId: this.postStatusId};
+	if (this.title !== undefined && this.content !== undefined && this.publishDate !== undefined && this.postStatusId !== undefined) {
+		var post = {title: this.title, content: this.content, publishDate: this.publishDate, postStatusId: this.postStatusId};
 		pool.query('INSERT INTO post SET ?', post, function(err, result) {
 			if (err) throw err;
 			if (typeof callback === 'function') {

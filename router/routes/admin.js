@@ -49,4 +49,14 @@ router.post('/change/:post_id', function(req, res) {
 	});
 });
 
+router.get('/delete/:post_id', function(req, res) {
+	//Удаляем пост
+	Post.delete(req.params.post_id, function() {
+		//Рендерем главную страницу админки
+		Post.findAll( function(rows) {
+			res.render('post/index', {posts: rows});
+		});
+	});
+});
+
 module.exports = router;

@@ -8,4 +8,5 @@ html
 			ul
 				each post in posts
 					li= post.content + ' ' 
-						a(href='/admin/change/' + post.id) Изменить
+						a(href='/admin/change/' + post.id) Изменить 
+						a(href='/admin/delete/' + post.id) Удалить
